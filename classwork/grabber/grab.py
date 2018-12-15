@@ -6,9 +6,34 @@ print('Grabber')
 
 def main():
     print('main')
-    dem = get_demir()
-    print('dem', dem)
+    all_data = {}
+    all_list = []
 
+    for item in get_demir():
+        all_list.append(item)
+
+    for item in get_kicb():
+        all_list.append(item)
+
+    for item in get_cbk():
+        all_list.append(item)
+
+    for _list in all_list:
+        currency = _list['cur']
+        if currency not in all_data:
+            all_data[currency] = {
+                'buy': [],
+                'sell': [],
+            }
+
+        all_data[currency]['buy'].append(_list['buy'])
+        all_data[currency]['sell'].append(_list['sell'])
+
+    for currency, _data in all_data.items():
+        print(currency)
+        print(sum(_data['buy']) / len(_data['buy']))
+        print(sum(_data['sell']) / len(_data['buy']))
+        print('----------------------')
 
 def get_demir():
     print('demir')
@@ -40,20 +65,26 @@ def get_demir():
                 })
     return ret
 
+
 def get_kicb():
-    ret = [{'cur': 'EUR', 'buy': 78.5, 'sell': 79.8}, {'cur': 'USD', 'buy': 69.7, 'sell': 69.9},
-           {'cur': 'RUB', 'buy': 1.04, 'sell': 1.065}, {'cur': 'TRY', 'buy': 12.05, 'sell': 13.17},
-           {'cur': 'KZT', 'buy': 0.181, 'sell': 0.191}, {'cur': 'EUR', 'buy': 77.97, 'sell': 79.58},
-           {'cur': 'USD', 'buy': 69.65, 'sell': 69.9}, {'cur': 'RUB', 'buy': 1.028, 'sell': 1.074},
-           {'cur': 'TRY', 'buy': 12.3, 'sell': 13.66}, {'cur': 'KZT', 'buy': 0.184, 'sell': 0.1924}]
+    ret = [
+        {'cur': 'EUR', 'buy': 79.5, 'sell': 79.6},
+        {'cur': 'USD', 'buy': 69.1, 'sell': 69.2},
+        {'cur': 'RUB', 'buy': 1, 'sell': 1.165},
+        {'cur': 'TRY', 'buy': 12.056, 'sell': 14.17},
+        {'cur': 'KZT', 'buy': 0.281, 'sell': 0.161},
+    ]
     return ret
 
+
 def get_cbk():
-    ret = [{'cur': 'EUR', 'buy': 78.5, 'sell': 79.8}, {'cur': 'USD', 'buy': 69.7, 'sell': 69.9},
-           {'cur': 'RUB', 'buy': 1.04, 'sell': 1.065}, {'cur': 'TRY', 'buy': 12.05, 'sell': 13.17},
-           {'cur': 'KZT', 'buy': 0.181, 'sell': 0.191}, {'cur': 'EUR', 'buy': 77.97, 'sell': 79.58},
-           {'cur': 'USD', 'buy': 69.65, 'sell': 69.9}, {'cur': 'RUB', 'buy': 1.028, 'sell': 1.074},
-           {'cur': 'TRY', 'buy': 12.3, 'sell': 13.66}, {'cur': 'KZT', 'buy': 0.184, 'sell': 0.1924}]
+    ret = [
+        {'cur': 'EUR', 'buy': 76.5, 'sell': 79.83},
+        {'cur': 'USD', 'buy': 66.7, 'sell': 69.94},
+        {'cur': 'RUB', 'buy': 1.0411, 'sell': 1.0565},
+        {'cur': 'TRY', 'buy': 12.051, 'sell': 13.176},
+        {'cur': 'KZT', 'buy': 0.1812, 'sell': 0.1917},
+    ]
     return ret
 
 
