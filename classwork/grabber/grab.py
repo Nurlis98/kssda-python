@@ -9,14 +9,18 @@ def main():
     all_data = {}
     all_list = []
 
-    for item in get_demir():
-        all_list.append(item)
+    # for item in get_demir():
+    #     all_list.append(item)
+    #
+    # for item in get_kicb():
+    #     all_list.append(item)
+    #
+    # for item in get_cbk():
+    #     all_list.append(item)
 
-    for item in get_kicb():
-        all_list.append(item)
-
-    for item in get_cbk():
-        all_list.append(item)
+    all_list += get_demir()
+    all_list += get_kicb()
+    all_list += get_cbk()
 
     for _list in all_list:
         currency = _list['cur']
